@@ -17,6 +17,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        dispatch(removeUser());
       })
       .catch((error) => {
         console.error(error);
