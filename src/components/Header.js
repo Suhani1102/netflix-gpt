@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO, USER_AVATAR } from "../utils/constant";
+import { toggleGptSearchView } from "../utils/GptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,11 @@ const Header = () => {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleGptSearch = () => {
+    // Toggle GPT Search
+    dispatch(toggleGptSearchView());
   };
 
   // Close dropdown if clicked outside
@@ -57,6 +63,12 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt="logo" />
       {user && (
         <div className="relative flex items-center p-4" ref={dropdownRef}>
+          <button
+            className="py-2 px-4 m-2 bg-purple-800 text-white"
+            onClick={handleGptSearch}
+          >
+            GPT Search
+          </button>
           <img
             className="w-12 h-12 cursor-pointer"
             src={USER_AVATAR}
