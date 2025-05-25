@@ -1,3 +1,9 @@
+# Netflix GPT
+
+A modern React.js web app that combines the intuitive UI of Netflix with the power of GPT. Users can search, explore, and get intelligent movie recommendations using AI. Built with Tailwind CSS, React Router, Redux Toolkit and OpenAI integration for smart content discovery.
+
+<img src="./public/netflix_homepage.png" alt="Homepage"/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
