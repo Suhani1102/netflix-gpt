@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO, USER_AVATAR } from "../utils/constant";
+import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from "../utils/constant";
 import { toggleGptSearchView } from "../utils/GptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef();
 
@@ -28,6 +30,10 @@ const Header = () => {
   const handleGptSearch = () => {
     // Toggle GPT Search
     dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
   };
 
   // Close dropdown if clicked outside
@@ -63,11 +69,23 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt="logo" />
       {user && (
         <div className="relative flex items-center p-4" ref={dropdownRef}>
+          {showGptSearch && (
+            <select
+              className="py-2 px-4 my-2 bg-gray-900 text-white rounded-lg"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
-            className="py-2 px-4 m-2 bg-purple-800 text-white"
+            className="py-2 px-6 m-2 bg-purple-800 text-white rounded-lg"
             onClick={handleGptSearch}
           >
-            GPT Search
+            {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
           <img
             className="w-12 h-12 cursor-pointer"
