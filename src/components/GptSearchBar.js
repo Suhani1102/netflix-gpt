@@ -10,8 +10,6 @@ const GptSearchBar = () => {
   const searchText = useRef(null);
   const dispatch = useDispatch();
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
-
     // Search movie in TMDB
     const searchMovieTMDB = async (movie) => {
       const data = await fetch(
@@ -33,16 +31,13 @@ const GptSearchBar = () => {
       messages: [{ role: "assistant", content: gptQuery }],
     });
 
-    console.log(gptResults.choices?.[0].message?.content);
     const gptMoviesSuggestions =
       gptResults.choices?.[0].message?.content.split(",");
-    console.log("gptMoviesSuggestions :: ", gptMoviesSuggestions);
 
     const promiseArray = gptMoviesSuggestions?.map((movie) =>
       searchMovieTMDB(movie)
     );
     const tmdbResults = await Promise.all(promiseArray);
-    console.log("tmdbResults :: ", tmdbResults);
     dispatch(
       addGptMovieResult({
         movieNames: gptMoviesSuggestions,
