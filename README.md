@@ -4,6 +4,12 @@ A modern React.js web app that combines the intuitive UI of Netflix with the pow
 
 <img src="./public/netflix_homepage.png" alt="Homepage"/>
 
+# GPT-Powered Smart Search
+
+Integrated a GPT-based search feature using OpenAI APIs to enhance user experience by providing intelligent movie suggestions based on user interests. This allows users to discover content through natural language queries, making the search more interactive and intuitive.
+
+<img src="./public/netflix_search.png" alt="Homepage"/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
